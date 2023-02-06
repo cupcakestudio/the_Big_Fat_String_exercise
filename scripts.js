@@ -38,8 +38,10 @@ function generateOutput(inputString, dropdownValue) {
   } else if (dropdownValue === "5") {
     if (inputString.includes(".jpg")) {
       output.value = `${inputString}` + " is .jpg";
-    } else {
+    } else if (inputString.includes(".png")) {
       output.value = `${inputString}` + " is .png";
+    } else {
+      output.value = "this is not a valid file";
     }
   } else if (dropdownValue === "6") {
     //repeat takes an int, in this case. .length. of the input.

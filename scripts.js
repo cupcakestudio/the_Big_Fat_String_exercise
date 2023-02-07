@@ -5,6 +5,8 @@ let dropdownChoice = document.querySelector("#fatStringTransformer");
 let output = document.querySelector("#outputString");
 let inputString = "";
 let dropdownValue = "";
+//for option 8
+let result = "";
 input.addEventListener("input", () => {
   inputString = input.value;
   console.log(inputString);
@@ -55,18 +57,33 @@ function generateOutput(inputString, dropdownValue) {
       inputString.slice(3).toLowerCase()
     }`;
   } else if (dropdownValue === "8") {
-    if (inputString.includes(" ")) {
-      output.value =
-        inputString.substring(0, inputString.indexOf(" ") + 1).toLowerCase() +
-        inputString[inputString.indexOf(" ") + 1].toUpperCase() +
-        inputString.substring(inputString.indexOf(" ") + 2).toLowerCase();
-    } else if (inputString.includes("-")) {
-      output.value =
-        inputString.substring(0, inputString.indexOf("-") + 1).toLowerCase() +
-        inputString[inputString.indexOf("-") + 1].toUpperCase() +
-        inputString.substring(inputString.indexOf("-") + 2).toLowerCase();
-    }
-  } else {
+    //if string has more spaces or hyphens
+
+    //make a string var to put the resulting string in
+    //make the string to an arr[], loop through each letter based on iterations on length of array (the i)
+    //check if the current iteration's index' previous index (-1) is a space or a hyphen
+    Array.from(inputString).forEach((letter, i) => {
+      if (inputString[i - 1] === " " || inputString[i - 1] === "-") {
+        result += inputString[i].toUpperCase();
+      } else {
+        result += inputString[i];
+      }
+    });
+    output.value = result;
+  }
+  //   if (inputString.includes(" ")) {
+  //     output.value =
+  //       inputString.substring(0, inputString.indexOf(" ") + 1).toLowerCase() +
+  //       inputString[inputString.indexOf(" ") + 1].toUpperCase() +
+  //       inputString.substring(inputString.indexOf(" ") + 2).toLowerCase();
+  //   } else if (inputString.includes("-")) {
+  //     output.value =
+  //       inputString.substring(0, inputString.indexOf("-") + 1).toLowerCase() +
+  //       inputString[inputString.indexOf("-") + 1].toUpperCase() +
+  //       inputString.substring(inputString.indexOf("-") + 2).toLowerCase();
+  //   }
+  // }
+  else {
     alert("choose an option that is not blank");
   }
 } //for multiple spaces or hyphens, make for/while loop to find occurences of them and replaceAll potentially
